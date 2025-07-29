@@ -48,6 +48,21 @@ pip install numpy matplotlib seaborn scikit-learn tensorflow torch
 ```
 ---
 
-Thank you for exploring this project! 🚀
+## Results
 
-## Image
+### Accuracy Graph During Training
+![Accuracy Graph](Resultados/grafico_accuracy.png)
+
+### Training Accuracy Graph
+![Training Accuracy Graph](Resultados/grafico_accuracy_train.png)
+
+### Confusion Matrix (Version 1)
+![Confusion Matrix](Resultados/matriz_confusao.v1.png)
+
+### Confusion Matrix After Fine-Tuning
+![Confusion Matrix Fine-Tuning](Resultados/matriz_fine%20tunnig.png)
+
+### Training Time or Time Analysis
+![Time Analysis](Resultados/tempo.png)
+
+Thank you for exploring this project! 🚀
