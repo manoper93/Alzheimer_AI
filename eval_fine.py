@@ -18,7 +18,7 @@ test_dataset_raw = image_dataset_from_directory(
     shuffle=False
 )
 
-# ✅ Guardar classes antes do .map
+# Guardar classes antes do .map
 class_names = test_dataset_raw.class_names
 
 # Normalizar imagens
@@ -34,7 +34,7 @@ y_true = np.concatenate([y for x, y in test_dataset], axis=0)
 
 # Relatório de classificação
 report = classification_report(y_true, y_pred, target_names=class_names, digits=2)
-print("📊 Classification Report:\n", report)
+print("Classification Report:\n", report)
 
 # Matriz de confusão
 cm = confusion_matrix(y_true, y_pred)

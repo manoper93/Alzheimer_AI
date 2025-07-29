@@ -11,19 +11,19 @@ import pickle
 # 🔹 Verificar se há GPU disponível
 if torch.cuda.is_available():
     device = torch.device("cuda:0")
-    print(f"✅ A usar GPU: {torch.cuda.get_device_name(0)}")
+    print(f"A usar GPU: {torch.cuda.get_device_name(0)}")
 else:
     device = torch.device("cpu")
-    print("⚠️ A usar CPU.")
+    print("A usar CPU.")
 
-# 🔹 Parâmetros
+# Parâmetros
 DATASET_PATH = "Teste"
 IMG_SIZE = (128, 128)
 BATCH_SIZE = 40
 EPOCHS = 20  # Apenas as novas épocas desejadas
 MODEL_PATH = "modelo_alzheimer.keras"
 
-# 🔹 Carregar dados
+# Carregar dados
 raw_train_dataset = image_dataset_from_directory(
     DATASET_PATH,
     validation_split=0.2,
@@ -42,22 +42,22 @@ raw_val_dataset = image_dataset_from_directory(
     batch_size=BATCH_SIZE
 )
 
-# 🔹 Guardar nomes das classes
+# Guardar nomes das classes
 class_names = raw_train_dataset.class_names
 with open("class_names.pkl", "wb") as f:
     pickle.dump(class_names, f)
 
-# 🔹 Normalizar
+# Normalizar
 normalization_layer = layers.Rescaling(1./255)
 train_dataset = raw_train_dataset.map(lambda x, y: (normalization_layer(x), y))
 val_dataset = raw_val_dataset.map(lambda x, y: (normalization_layer(x), y))
 
-# 🔹 Criar ou carregar modelo
+# Criar ou carregar modelo
 if os.path.exists(MODEL_PATH):
-    print("🔄 A carregar modelo existente...")
+    print("A carregar modelo existente...")
     model = load_model(MODEL_PATH)
 else:
-    print("🆕 A criar novo modelo...")
+    print("A criar novo modelo...")
     model = keras.Sequential([
         layers.Conv2D(32, (3, 3), activation='relu', input_shape=(IMG_SIZE[0], IMG_SIZE[1], 3)),
         layers.MaxPooling2D(2, 2),
@@ -77,15 +77,15 @@ else:
         metrics=['accuracy']
     )
 
-# 🔹 Continuar o treino
+# Continuar o treino
 with tf.device("/GPU:0" if torch.cuda.is_available() else "/CPU:0"):
     history = model.fit(train_dataset, validation_data=val_dataset, epochs=EPOCHS)
 
-# 🔹 Guardar modelo atualizado
+# Guardar modelo atualizado
 model.save(MODEL_PATH)
-print(f"✅ Modelo guardado como '{MODEL_PATH}'")
+print(f"Modelo guardado como '{MODEL_PATH}'")
 
-# 🔹 Gráfico de treino
+# Gráfico de treino
 acc = history.history['accuracy']
 val_acc = history.history['val_accuracy']
 epochs_range = range(len(acc))
