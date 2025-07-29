@@ -45,3 +45,9 @@ Install them via pip:
 
 ```bash
 pip install numpy matplotlib seaborn scikit-learn tensorflow torch
+```
+---
+
+Thank you for exploring this project! 🚀
+
+## Image
